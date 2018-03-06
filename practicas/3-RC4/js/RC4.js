@@ -5,6 +5,7 @@ function rc4(){
   var key = Clave.value;
   intro.innerHTML = str;
   clave.innerHTML = key;
+  console.log(S);
   var msj = getSTR(str);
   var k = getKEY(key);
 
@@ -48,7 +49,7 @@ function getKEY(key){
       k[j] = "" + k[j] + key[i];
 
     } else {
-      console.log(k[j])
+      //console.log(k[j])
       j++;
       k[j] = "";
     }
@@ -73,6 +74,7 @@ function secCifr(str){
   var i = 0;
   var j = 0;
   var sol =[];
+  var sc = ""
   for(var z = 0; z < str.length; z++) {
 
     i = (i + 1)%256;
@@ -80,21 +82,27 @@ function secCifr(str){
 
     cambio(i, j);
     var t = (S[i] + S[j])%256;
-    console.log("la t: " + t);
+    //console.log("la t: " + t);
+    if(sc == "") sc = S[t];
+    else sc = "" + sc + ", " + S[t];
+    //temp.innerHTML = "" + temp.innerHTML + ", " S[t];
+    console.log("Sec cifr: " + S[t] );
+
     sol[z] = frombin(xor(tobin(S[t]), tobin(parseInt(str[z]))));
   }
+  temp.innerHTML = sc;
   return sol;
 }
 
 function xor(str1, str2) {
   var sol = ""
-  console.log("str1: " + str1)
-  console.log("str2: " + str2)
+  //console.log("str1: " + str1)
+  //console.log("str2: " + str2)
   for(var i = 0; i < 8; i++ ){
     if(str1[i] == str2[i]) sol = "" + sol + "0";
     else sol = "" + sol + "1";
   }
-  console.log("salida: " + sol);
+  //console.log("salida: " + sol);
   return sol;
 }
 

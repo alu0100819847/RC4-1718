@@ -23,5 +23,4 @@ function iniNoImp() {
 }
 
 iniNoImp();
-console.log(Nimp);
 rein();
